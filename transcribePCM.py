@@ -15,12 +15,16 @@ with wave.open(wavefn, 'wb') as wavfile: #convert pcm to wav
     wavfile.setparams((2, 2, 48000, 0, 'NONE', 'NONE'))
     wavfile.writeframes(pcmdata)
 
-r = sr.Recognizer()
-with sr.AudioFile(wavefn) as source:
-    audio = r.record(source)
+try:
+    r = sr.Recognizer()
+    with sr.AudioFile(wavefn) as source:
+        audio = r.record(source)
+except:
+    print('SR failed')
+
 
 os.remove(wavefn)
 try:
     print(r.recognize_google(audio))
 except:
-    print('!Unrecognizable')
+    print('Unrecognizable')
