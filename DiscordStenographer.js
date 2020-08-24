@@ -50,7 +50,12 @@ let debug = (textChannel) => {
   });
 }
 
+let manualDebug = (info) => {
+    logStream.write(info+'\n');
+}
+
 bot.on('guildMemberSpeaking', (member, speaking) => {
+  manualDebug('GMS');
   if(speaking.bitfield){
     const ts = new Date(Date.now()).toLocaleString();
     const conInfo = voiceConnections[member.voice.channelID];
