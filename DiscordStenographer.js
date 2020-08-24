@@ -91,6 +91,7 @@ let start = (member, textChannel, echo) => {
   }
 
   member.voice.channel.join().then((voiceConnection) => {
+    voiceConnection.play('./bombsiren.mp3');
     let channelID = member.voice.channelID;
     voiceConnections[channelID] = {};
     voiceConnections[channelID].echo = echo;
