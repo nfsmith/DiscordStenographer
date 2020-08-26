@@ -32,5 +32,10 @@ Once your bot is up and running you need to tell it what you want it to do in di
 + I ran into a bug where seemingly at random the bot wouldn't work. The 'guildMemberSpeaking' event wouldn't trigger so no audio would be recorded. This could be fixed by simply restarting the bot, and I could not consistently recreate it for easy testing. I was never able to figure out what caused this issue, but when I made it so the bot played a sound when it joins a channel, it stopped happening. I haven't had this issue in a while but I never figured out the cause of it so I figure its worth mentioning here.
 + I'm sure you could find a way to break the bot by intentionally sending commands at the wrong time or situation. Don't do that and it should be fine.
 
+#### Potential Improvements
++ I just used the default parameters for audio transcription. Transcription quality might be able to be improved by tinkering with this.
++ Some checks could be added so that users can't break the bot even if they try
++ Right now this bot must be set up and run by someone who wants to use it. More popular bots are already set up and running and can just be invited to a server. Hosting this bot somewhere would improve the accessibility
+
 #### Questions?
 Email me at nickfsmith96@gmail.com
