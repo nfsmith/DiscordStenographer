@@ -27,4 +27,4 @@ os.remove(wavefn)
 try:
     print(r.recognize_google(audio))
 except:
-    print('Unrecognizable')
+    print('!Unrecognizable')
