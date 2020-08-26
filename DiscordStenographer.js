@@ -17,14 +17,14 @@ const TOKEN = process.env.TOKEN;
 bot.login(TOKEN);
 
 bot.on('ready', () => {
-  console.info(`Logged in as ${bot.user.tag}!`);
+  manualDebug(`Logged in as ${bot.user.tag}!`);
 });
 
 bot.on('message', msg =>{
   if(msg.content.charAt(0) === '!'){
     let req = msg.content.slice(1);
     let textChannel = msg.channel;
-    console.log('Request received: '+req);
+    manualDebug('Request received: '+req);
     if (req === 'record') {
       start(msg.member, textChannel, false);
     } else if (req === 'off') {
@@ -68,7 +68,7 @@ bot.on('guildMemberSpeaking', (member, speaking) => {
       let py = child.spawn('python', [transcribePCM, pcmName]);
       py.stdout.on('data', function(data){
         const message = data.toString();
-        console.log("transcribePCM returned: "+message);
+        manualDebug("transcribePCM returned: "+message);
         if(message[0]!=='!'){
           const echo = conInfo.echo;
           if(echo){
@@ -85,13 +85,14 @@ bot.on('guildMemberSpeaking', (member, speaking) => {
 });
 
 let start = (member, textChannel, echo) => {
+  manualDebug('Starting');
   if(!member || !member.voice.channel) {
-    console.log('Member does not exist or is not in a voice channel');
+    manualDebug('Member does not exist or is not in a voice channel');
     return;
   }
 
   member.voice.channel.join().then((voiceConnection) => {
-    voiceConnection.play('./bombsiren.mp3');
+    voiceConnection.play('./sms-alert-5-daniel_simon.mp3', {volume: 0.2});
     let channelID = member.voice.channelID;
     voiceConnections[channelID] = {};
     voiceConnections[channelID].echo = echo;
@@ -104,13 +105,14 @@ let start = (member, textChannel, echo) => {
       voiceConnections[channelID].saveStream = fs.createWriteStream(saveName);
     }
   }).catch((error) => {
-    console.log("error on channel join");
+    manualDebug("error on channel join");
   });
 }
 
 let stop = (member) => {
+  manualDebug('Stopping');
   if(!member || !member.voice.channel) {
-    console.log('Member does not exist or is not in a voice channel');
+    manualDebug('Member does not exist or is not in a voice channel');
     return;
   }
   let channelID = member.voice.channelID;
